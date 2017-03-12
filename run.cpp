@@ -1,7 +1,3 @@
-// /Users/niklas/Library/Developer/Xcode/DerivedData/ArduinoSimulator-bryuskvtdsdvwrdsztosupgcipsk/Build/Products/Debug/ArduinoSimulator
-
-// clang++ Arduino.cpp main.cpp Print.cpp SoftwareSerial.cpp WString.cpp -lncurses -lc++ -o sim && ./sim
-
 #include "run.h"
 
 const int TABLE_OFFSET_Y = 7;
