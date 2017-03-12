@@ -6,7 +6,7 @@ CPPFLAGS= -I..
 
 .PHONY: clean
 clean : 
-	rm -f $(LIB_OBJS)
+	rm -f $(LIB_OBJS) core.a
 
 .DEFAULT_GOAL := all
 .PHONY: all
