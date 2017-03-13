@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "util.h"
+//#include "util.h"
   
 #define DEC 10
 #define HEX 16
