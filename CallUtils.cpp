@@ -14,7 +14,8 @@ void callGetState(Data *d, int id){
 	func2 f = (void (*)(Data*, int)) dlsym(RTLD_MAIN_ONLY, "_Z8getStateP4Datai");
 	char *error;
 	if ((error = dlerror()) != NULL)  {
-		printf("error: %s\n", error);
+		// printf("error: %s\n", error);
+	} else{
+		f(d, id);
 	}
-	f(d, id);
 }
