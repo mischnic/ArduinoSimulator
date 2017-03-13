@@ -25,10 +25,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "pins_arduino_tiny84.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <sys/time.h>
+#include <stdint.h>
+#include "pins_arduino_tiny84.h"
 
 #ifndef IS_SIM
 #  define IS_SIM 1
