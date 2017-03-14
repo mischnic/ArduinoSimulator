@@ -5,9 +5,10 @@ void call(const char function[]){
 	func f = (void (*)(void))dlsym(RTLD_MAIN_ONLY, function);
 	char *error;
 	if ((error = dlerror()) != NULL)  {
-		printf("error: %s\n", error);
+		// printf("error: %s\n", error);
+	} else {
+		f();
 	}
-	f();
 }
 
 void callGetState(Data *d, int id){
