@@ -9,7 +9,7 @@ CXX = clang++
 
 CPPFLAGS = -I. -Icore
 
-OBJS = CallUtils.o run.o Simulation.o
+OBJS = CallUtils.o main.o Simulation.o
 
 .PHONY: clean
 clean : 
@@ -28,5 +28,5 @@ libArduinoSimulator.dylib: core/core.a $(OBJS)
 
 
 CallUtils.o:	  CallUtils.h  		Sketch.h
-run.o:			  run.h  			Sketch.h Simulation.h kbhit.h core/SoftwareSerial.h CallUtils.h
+main.o:			  main.h  			Sketch.h Simulation.h kbhit.h core/SoftwareSerial.h CallUtils.h
 Simulation.o:	  Simulation.h  	core/Arduino.h Sketch.h CallUtils.h

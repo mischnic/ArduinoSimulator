@@ -1,4 +1,4 @@
-#include "run.h"
+#include "main.h"
 
 const int TABLE_OFFSET_Y = 7;
 const int TABLE_OFFSET_X = 10;
