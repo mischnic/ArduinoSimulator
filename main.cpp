@@ -109,12 +109,12 @@ void printDesc(bool init){
 	Data d;	
 	if(init){
 		memset(&d, 0, sizeof(Data));
-		callGetState(&d, 100-1);
+		callGetState(&d, DATA_INFO | 0);
 		vcc = d.value / 1000.0f;
 
 		for(int i = 0; i < 20; i++){
 			memset(&d, 0, sizeof(Data));
-			callGetState(&d, 100+i);
+			callGetState(&d, DATA_PIN | i);
 			strcpy(descList[i], d.desc);
 		}
 	}
@@ -137,14 +137,17 @@ void printDesc(bool init){
 		mvprintw(y, x, descList[i]);
 	}
 
-	memset(&d, 0, sizeof(Data));
-	callGetState(&d, 0);
-	int max = d.value + 1;
-	for(int i = 1; i < max; i++){
+	// memset(&d, 0, sizeof(Data));
+	// callGetState(&d, 0);
+	// int max = d.value + 1;
+
+	for(int i = 1; i < 20; i++){
 		memset(&d, 0, sizeof(Data));
-		callGetState(&d, i);
+		callGetState(&d, DATA_INFO | i);
 		if(strcmp(d.desc, "MOTOR") == 0){
 			renderMotor(10,30, d.value);
+		} else if(strcmp(d.desc, "!!END") == 0){
+			break;
 		} else {
 			color_set(COLOR_WHITE, 0);
 			mvaddstr(10+4+2+(i-2), 30, "                     ");
