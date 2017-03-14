@@ -82,7 +82,7 @@ void startSim(void){
 		return;
 	}
 	simulationPaused = false;
-    simulationStart = realmillis();//millis();
+	simulationStart = realmillis();//millis();
 	simulationPausedStart = 0;
 	simulationRunning = true;
 }
@@ -143,67 +143,6 @@ void printDesc(bool init){
 			callGetState(&d, 100+i);
 			strcpy(descList[i], d.desc);
 		}
-
-// #ifdef PIN_0
-// 		strcpy(descList[0], PIN_0);
-// #endif
-// #ifdef PIN_1
-// 		strcpy(descList[1], PIN_1);
-// #endif
-// #ifdef PIN_2
-// 		strcpy(descList[2], PIN_2);
-// #endif
-// #ifdef PIN_3
-// 		strcpy(descList[3], PIN_3);
-// #endif
-// #ifdef PIN_4
-// 		strcpy(descList[4], PIN_4);
-// #endif
-// #ifdef PIN_5
-// 		strcpy(descList[5], PIN_5);
-// #endif
-// #ifdef PIN_6
-// 		strcpy(descList[6], PIN_6);
-// #endif
-// #ifdef PIN_7
-// 		strcpy(descList[7], PIN_7);
-// #endif
-// #ifdef PIN_8
-// 		strcpy(descList[8], PIN_8);
-// #endif
-// #ifdef PIN_9
-// 		strcpy(descList[9], PIN_9);
-// #endif
-// #ifdef PIN_10
-// 		strcpy(descList[10], PIN_10);
-// #endif
-// #ifdef PIN_11
-// 		strcpy(descList[11], PIN_11);
-// #endif
-// #ifdef PIN_12
-// 		strcpy(descList[12], PIN_12);
-// #endif
-// #ifdef PIN_13
-// 		strcpy(descList[13], PIN_13);
-// #endif
-// #ifdef PIN_14
-// 		strcpy(descList[14], PIN_14);
-// #endif
-// #ifdef PIN_15
-// 		strcpy(descList[15], PIN_15);
-// #endif
-// #ifdef PIN_16
-// 		strcpy(descList[16], PIN_16);
-// #endif
-// #ifdef PIN_17
-// 		strcpy(descList[17], PIN_17);
-// #endif
-// #ifdef PIN_18
-// 		strcpy(descList[18], PIN_18);
-// #endif
-// #ifdef PIN_19
-// 		strcpy(descList[19], PIN_19);
-// #endif
 	}
 
 	attrset(A_DIM);
@@ -226,7 +165,7 @@ void printDesc(bool init){
 
 	memset(&d, 0, sizeof(Data));
 	callGetState(&d, 0);
-    int max = d.value + 1;
+	int max = d.value + 1;
 	for(int i = 1; i < max; i++){
 		memset(&d, 0, sizeof(Data));
 		callGetState(&d, i);
@@ -238,7 +177,7 @@ void printDesc(bool init){
 			if(d.desc[0] == '?' && d.desc[1] == 'B'){
 				char buffer[16];
 				strncpy(buffer, d.desc+2, strlen(d.desc)+2+1);
-                mvprintw(10+4+2+(i-2), 30, "%s: %s", buffer, d.value ? "true" : "false");
+				mvprintw(10+4+2+(i-2), 30, "%s: %s", buffer, d.value ? "true" : "false");
 			} else{
 				mvprintw(10+4+2+(i-2), 30, "%s: %i", d.desc, d.value);
 			}
@@ -281,13 +220,13 @@ void update()
 	if(simulationRunning){
 		if(simulationPaused){
 			printw("  Running for %.2f s", ((simulationPausedStart-simulationStart)/1000.0)*
-            								( (speedDivisor < 0) ? (-speedDivisor) : (1.0f/speedDivisor) )
-            				);
+											( (speedDivisor < 0) ? (-speedDivisor) : (1.0f/speedDivisor) )
+							);
 		} else{
-            printw("  Running for %.2f s", ((realmillis()-simulationStart)/1000.0)*
-            								( (speedDivisor < 0) ? (-speedDivisor) : (1.0f/speedDivisor) )
-            				);
-        }
+			printw("  Running for %.2f s", ((realmillis()-simulationStart)/1000.0)*
+											( (speedDivisor < 0) ? (-speedDivisor) : (1.0f/speedDivisor) )
+							);
+		}
 		if(speedDivisor < 0){
 			printw("; Speed=%ix", abs(speedDivisor));
 		} else{
@@ -557,7 +496,7 @@ int guiMain(void)
 								toggleSimPause();
 							} else {
 								startSim();
-                                pauseSim();
+								pauseSim();
 							}
 						}
 					}
@@ -571,8 +510,8 @@ int guiMain(void)
 			} else if(ch == 'd'){
 				if(!simulationRunning) {
 					startSim();
-	                pauseSim();
-            	}
+					pauseSim();
+				}
 			} else if(ch == 'e'){
 				if(simulationRunning) {
 					toggleSimPause();
