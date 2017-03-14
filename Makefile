@@ -9,7 +9,7 @@ CXX = clang++
 
 CPPFLAGS = -I. -Icore
 
-OBJS = CallUtils.o run.o Simulation.o main.o
+OBJS = CallUtils.o run.o Simulation.o
 
 .PHONY: clean
 clean : 
@@ -18,7 +18,7 @@ clean :
 .PHONY: lib
 lib: libArduinoSimulator.dylib
 
-.PHONY: core
+.PHONY: core/core.a
 core/core.a:
 	$(MAKE) -C core
 

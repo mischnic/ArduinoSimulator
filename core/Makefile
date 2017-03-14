@@ -9,7 +9,7 @@ core.a: $(LIB_OBJS)
 	ranlib core.a
 
 .PHONY: clean
-clean : 
+clean:
 	rm -f $(LIB_OBJS) core.a
 
 Arduino.o:		  Arduino.h  		SoftwareSerial.h ../pins_arduino_tiny84.h

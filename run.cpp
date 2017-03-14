@@ -25,55 +25,17 @@ pthread_t simulationThread;
 extern msg serialmsg[SERIALBUFFER_SIZE];
 
 
-// void log(const char *format, ...)
-// {
-//     char buffer [50];
-//     int n, a=5, b=3;
-
-//     va_list arg;
-//     va_start(arg, format);
-
-//     n=sprintf (buffer, format, arg);
-
-//     va_end(arg);
-// }
-
-void renderMotor(int startY, int startX, int val){
-	for(int y = 0; y < 5; y++){
-		move(startY + y, 0); clrtoeol();
-	}
-	attrset(0);
-	int color = COLOR_WHITE;
-	int dir = val >> 4 & 0b00000011;
-	int state = val & 0b00000011;
-	if(state == 0){
-		color = COLOR_WHITE;
-	} else if(state == 1){
-		color = COLOR_RED;
-	} else if(state == 2){
-		color = COLOR_GREEN;
-	}
-	color_set(color,0);
-	if(dir == 1){
-		mvaddstr(startY+0, startX, "   -----  ");
-		mvaddstr(startY+1, startX, " /-"); color_set(COLOR_MAGENTA,0); addstr("/--"); color_set(color,0); addstr("---\\");
-		mvaddstr(startY+2, startX, "|-"); color_set(COLOR_MAGENTA,0); addstr("|"); color_set(color,0); addstr("--M----|");
-		mvaddstr(startY+3, startX, " \\-"); color_set(COLOR_MAGENTA,0); addstr("\\>"); color_set(color,0); addstr("----/");
-		mvaddstr(startY+4, startX, "   -----");
-	} else if(dir == 0) {
-		mvaddstr(startY+0, startX, "   -----  ");
-		mvaddstr(startY+1, startX, " /-------\\");
-		mvaddstr(startY+2, startX, "|----M----|");
-		mvaddstr(startY+3, startX, " \\-------/");
-		mvaddstr(startY+4, startX, "   -----");
-	} else if(dir == 2){
-		mvaddstr(startY+0, startX, "   -----  ");
-		mvaddstr(startY+1, startX, " /---"); color_set(COLOR_MAGENTA,0); addstr("--\\"); color_set(color,0); addstr("-\\");
-		mvaddstr(startY+2, startX, "|----M--"); color_set(COLOR_MAGENTA,0); addstr("|"); color_set(color,0); addstr("-|");
-		mvaddstr(startY+3, startX, " \\----"); color_set(COLOR_MAGENTA,0); addstr("</"); color_set(color,0); addstr("-/");
-		mvaddstr(startY+4, startX, "   -----");
-	}
-}
+// 	
+// 	           ,,                                ,,                  ,,
+// 	 .M"""bgd  db                              `7MM           mm     db
+// 	,MI    "Y                                    MM           MM
+// 	`MMb.    `7MM  `7MMpMMMb.pMMMb.`7MM  `7MM    MM   ,6"Yb.mmMMmm `7MM  ,pW"Wq.`7MMpMMMb.
+// 	  `YMMNq.  MM    MM    MM    MM  MM    MM    MM  8)   MM  MM     MM 6W'   `Wb MM    MM
+// 	.     `MM  MM    MM    MM    MM  MM    MM    MM   ,pm9MM  MM     MM 8M     M8 MM    MM
+// 	Mb     dM  MM    MM    MM    MM  MM    MM    MM  8M   MM  MM     MM YA.   ,A9 MM    MM
+// 	P"Ybmmd" .JMML..JMML  JMML  JMML.`Mbod"YML..JMML.`Moo9^Yo.`Mbmo.JMML.`Ybmd9'.JMML  JMML.
+// 	
+// 	
 
 void startSim(void){
 	int err = pthread_create(&simulationThread, NULL, &run, NULL);
@@ -127,6 +89,18 @@ void quit(void){
 	endwin();
 }
 
+
+// 	
+// 	                               ,,
+// 	`7MMF'   `7MF'               `7MM           mm
+// 	  MM       M                   MM           MM
+// 	  MM       M `7MMpdMAo.   ,M""bMM   ,6"Yb.mmMMmm .gP"Ya
+// 	  MM       M   MM   `Wb ,AP    MM  8)   MM  MM  ,M'   Yb
+// 	  MM       M   MM    M8 8MI    MM   ,pm9MM  MM  8M""""""
+// 	  YM.     ,M   MM   ,AP `Mb    MM  8M   MM  MM  YM.    ,
+// 	   `bmmmmd"'   MMbmmd'   `Wbmd"MML.`Moo9^Yo.`Mbmo`Mbmmd'
+// 	               MM
+// 	             .JMML.
 
 
 void printDesc(bool init){
@@ -188,6 +162,44 @@ void printDesc(bool init){
 	attrset(0);
 	color_set(COLOR_WHITE,0);
 
+}
+
+
+void renderMotor(int startY, int startX, int val){
+	for(int y = 0; y < 5; y++){
+		move(startY + y, 0); clrtoeol();
+	}
+	attrset(0);
+	int color = COLOR_WHITE;
+	int dir = val >> 4 & 0b00000011;
+	int state = val & 0b00000011;
+	if(state == 0){
+		color = COLOR_WHITE;
+	} else if(state == 1){
+		color = COLOR_RED;
+	} else if(state == 2){
+		color = COLOR_GREEN;
+	}
+	color_set(color,0);
+	if(dir == 1){
+		mvaddstr(startY+0, startX, "   -----  ");
+		mvaddstr(startY+1, startX, " /-"); color_set(COLOR_MAGENTA,0); addstr("/--"); color_set(color,0); addstr("---\\");
+		mvaddstr(startY+2, startX, "|-"); color_set(COLOR_MAGENTA,0); addstr("|"); color_set(color,0); addstr("--M----|");
+		mvaddstr(startY+3, startX, " \\-"); color_set(COLOR_MAGENTA,0); addstr("\\>"); color_set(color,0); addstr("----/");
+		mvaddstr(startY+4, startX, "   -----");
+	} else if(dir == 0) {
+		mvaddstr(startY+0, startX, "   -----  ");
+		mvaddstr(startY+1, startX, " /-------\\");
+		mvaddstr(startY+2, startX, "|----M----|");
+		mvaddstr(startY+3, startX, " \\-------/");
+		mvaddstr(startY+4, startX, "   -----");
+	} else if(dir == 2){
+		mvaddstr(startY+0, startX, "   -----  ");
+		mvaddstr(startY+1, startX, " /---"); color_set(COLOR_MAGENTA,0); addstr("--\\"); color_set(color,0); addstr("-\\");
+		mvaddstr(startY+2, startX, "|----M--"); color_set(COLOR_MAGENTA,0); addstr("|"); color_set(color,0); addstr("-|");
+		mvaddstr(startY+3, startX, " \\----"); color_set(COLOR_MAGENTA,0); addstr("</"); color_set(color,0); addstr("-/");
+		mvaddstr(startY+4, startX, "   -----");
+	}
 }
 
 
@@ -354,7 +366,19 @@ void update()
 	refresh();
 }
 
-int guiMain(void)
+// 	
+// 	                           ,,
+// 	`7MMM.     ,MMF'           db
+// 	  MMMb    dPMM
+// 	  M YM   ,M MM   ,6"Yb.  `7MM  `7MMpMMMb.
+// 	  M  Mb  M' MM  8)   MM    MM    MM    MM
+// 	  M  YM.P'  MM   ,pm9MM    MM    MM    MM
+// 	  M  `YM'   MM  8M   MM    MM    MM    MM
+// 	.JML. `'  .JMML.`Moo9^Yo..JMML..JMML  JMML.
+// 	
+// 	
+
+int main(void)
 {    
 	initscr();
 	atexit(quit);
