@@ -144,10 +144,10 @@ void printDesc(bool init){
 	for(int i = 1; i < 20; i++){
 		memset(&d, 0, sizeof(Data));
 		callGetState(&d, DATA_INFO | i);
-		if(strcmp(d.desc, "MOTOR") == 0){
-			renderMotor(10,30, d.value);
-		} else if(strcmp(d.desc, "!!END") == 0){
+		if(strlen(d.desc) == 0){
 			break;
+		} else if(strcmp(d.desc, "MOTOR") == 0){
+			renderMotor(10,30, d.value);
 		} else {
 			color_set(COLOR_WHITE, 0);
 			mvaddstr(10+4+2+(i-2), 30, "                     ");
