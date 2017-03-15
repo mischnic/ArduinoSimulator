@@ -65,7 +65,9 @@ void digitalWrite(uint8_t pin, uint8_t state){
     }
     else{
         char buffer[30];
-        sprintf(buffer, "ERROR: %u not set to OUTPUT", pin);
+        char state[8];
+        modeString(state, pin);
+        sprintf(buffer, "ERROR: %s, not OUTPUT", state);
         strcpy(( char *) errors[pin],buffer);
     }
 }
@@ -76,7 +78,9 @@ int digitalRead(uint8_t pin){
     }
     else{
         char buffer[30];
-        sprintf(buffer, "ERROR: not set to INPUT %u ", pinModes[pin]);
+        char state[8];
+        modeString(state, pin);
+        sprintf(buffer, "ERROR: %s, not INPUT", state);
         strcpy(( char *) errors[pin],buffer);
         
         return -1;

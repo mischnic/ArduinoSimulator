@@ -356,7 +356,7 @@ void update()
 	int num = 0;
 	for(int i = 0; i < NUM_DIGITAL_PINS; i++){
 		if(strlen(errors[i]) != 0){
-			mvprintw(TABLE_OFFSET_Y + 4 + num++, 1, "%i, %s", i, (char*) errors[i]);
+			mvprintw(TABLE_OFFSET_Y + 4 + num++, 1, "%i: %s", i, (char*) errors[i]);
 		}
 	}
 
