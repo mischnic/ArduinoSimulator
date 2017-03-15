@@ -8,7 +8,12 @@
 
 typedef struct {
 	char desc[16];
-	int value;
+	enum { aint, afloat , abool} vtype;
+	union {
+		int i;
+		float f;
+		bool b;
+	};
 } Data;
 
 void setup(void);

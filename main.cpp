@@ -110,7 +110,7 @@ void printDesc(bool init){
 	if(init){
 		memset(&d, 0, sizeof(Data));
 		callGetState(&d, DATA_INFO | 0);
-		vcc = d.value / 1000.0f;
+		if(d.vtype == Data::afloat) vcc = d.f;
 
 		for(int i = 0; i < 20; i++){
 			memset(&d, 0, sizeof(Data));
@@ -137,30 +137,25 @@ void printDesc(bool init){
 		mvprintw(y, x, descList[i]);
 	}
 
-	// memset(&d, 0, sizeof(Data));
-	// callGetState(&d, 0);
-	// int max = d.value + 1;
-
 	for(int i = 1; i < 20; i++){
 		memset(&d, 0, sizeof(Data));
 		callGetState(&d, DATA_INFO | i);
 		if(strlen(d.desc) == 0){
 			break;
 		} else if(strcmp(d.desc, "MOTOR") == 0){
-			renderMotor(10,30, d.value);
+			renderMotor(10,30, d.i);
 		} else {
 			color_set(COLOR_WHITE, 0);
 			mvaddstr(10+4+2+(i-2), 30, "                     ");
-			if(d.desc[0] == '?' && d.desc[1] == 'B'){
-				char buffer[16];
-				strncpy(buffer, d.desc+2, strlen(d.desc)+2+1);
-				mvprintw(10+4+2+(i-2), 30, "%s: %s", buffer, d.value ? "true" : "false");
-			} else{
-				mvprintw(10+4+2+(i-2), 30, "%s: %i", d.desc, d.value);
+			if(d.vtype == Data::abool){
+				mvprintw(10+4+2+(i-2), 30, "%s: %s", d.desc, d.b ? "true" : "false");
+			} else if(d.vtype == Data::afloat){
+				mvprintw(10+4+2+(i-2), 30, "%s: %.4f", d.desc, d.f);
+			} else {
+				mvprintw(10+4+2+(i-2), 30, "%s: %d", d.desc, d.i);
 			}
 		}
 	}
-
 
 	attrset(0);
 	color_set(COLOR_WHITE,0);
