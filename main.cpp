@@ -4,6 +4,9 @@ const int TABLE_OFFSET_Y = 7;
 const int TABLE_OFFSET_X = 10;
 const int TABLE_SPACING = 6;
 const int CONTROLS_Y = 2;
+const int VAR_Y = 11;
+const int VAR_X = 10;
+
 int width = 0;
 int height = 0;
 
@@ -143,16 +146,16 @@ void printDesc(bool init){
 		if(strlen(d.desc) == 0){
 			break;
 		} else if(strcmp(d.desc, "MOTOR") == 0){
-			renderMotor(10,30, d.i);
+			renderMotor(VAR_Y,VAR_X, d.i);
 		} else {
 			color_set(COLOR_WHITE, 0);
-			mvaddstr(10+4+2+(i-2), 30, "                     ");
+			mvaddstr(VAR_Y+4+2+(i-2), VAR_X, "                     ");
 			if(d.vtype == Data::abool){
-				mvprintw(10+4+2+(i-2), 30, "%s: %s", d.desc, d.b ? "true" : "false");
+				mvprintw(VAR_Y+4+2+(i-2), VAR_X, "%s: %s", d.desc, d.b ? "true" : "false");
 			} else if(d.vtype == Data::afloat){
-				mvprintw(10+4+2+(i-2), 30, "%s: %.4f", d.desc, d.f);
+				mvprintw(VAR_Y+4+2+(i-2), VAR_X, "%s: %.4f", d.desc, d.f);
 			} else {
-				mvprintw(10+4+2+(i-2), 30, "%s: %d", d.desc, d.i);
+				mvprintw(VAR_Y+4+2+(i-2), VAR_X, "%s: %d", d.desc, d.i);
 			}
 		}
 	}
@@ -328,7 +331,7 @@ void update()
 	mvprintw(TABLE_OFFSET_Y +1, TABLE_OFFSET_X - 8, "DESC");
 	printDesc(false);
 
-	int x = width/3;
+	int x = VAR_X + width/3;
 	for(int i = 1; i < SERIALBUFFER_SIZE; i++){
 		msg m = serialmsg[i];
 		int y = TABLE_OFFSET_Y + 2 + (SERIALBUFFER_SIZE-i);

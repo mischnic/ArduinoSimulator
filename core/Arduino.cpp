@@ -135,14 +135,14 @@ unsigned long micros(void){
 unsigned long realmillis(void){
     struct timeval te; 
     gettimeofday(&te, NULL); // get current time
-    ulong milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // caculate milliseconds
+    ulong milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // calculate milliseconds
     return milliseconds;
 }
 
 unsigned long realmicros(void){
 	struct timeval te; 
     gettimeofday(&te, NULL); // get current time
-    ulong microseconds = te.tv_sec*1000000LL + te.tv_usec; // caculate milliseconds
+    ulong microseconds = te.tv_sec*1000000LL + te.tv_usec; // calculate microseconds
     return microseconds;
 }
 
@@ -151,7 +151,7 @@ unsigned long realmicros(void){
 void delay(unsigned long ms){
     static struct timespec tim;
     tim.tv_sec  = 0;
-    tim.tv_nsec = 3 * 1000000L;
+    tim.tv_nsec = 2 * 1000000L;
     ulong start = millis();
     while(millis() < (start + ms)){
         pthread_testcancel();
