@@ -1,4 +1,5 @@
-#pragma once
+#ifndef kbhit_h
+#define kbhit_h
 
 #include <unistd.h>
 #include <errno.h>
@@ -88,3 +89,5 @@ static int io_charavail(int fd)
 static int kbhit(){
 	return io_charavail(0);
 }
+
+#endif
