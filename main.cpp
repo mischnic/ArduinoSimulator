@@ -113,7 +113,7 @@ void printDesc(bool init){
 	if(init){
 		memset(&d, 0, sizeof(Data));
 		callGetState(&d, DATA_INFO | 0);
-		if(d.vtype == Data::afloat) vcc = d.f;
+		if(strcmp(d.desc, "VCC") && d.vtype == Data::afloat) vcc = d.f;
 
 		for(int i = 0; i < 20; i++){
 			memset(&d, 0, sizeof(Data));
@@ -122,7 +122,6 @@ void printDesc(bool init){
 		}
 	}
 
-	attrset(A_DIM);
 	for(int i = 0; i < 20; i++){
 		if(strlen(descList[i])==0){
 			continue;
@@ -159,9 +158,6 @@ void printDesc(bool init){
 			}
 		}
 	}
-
-	attrset(0);
-	color_set(COLOR_WHITE,0);
 
 }
 
@@ -324,11 +320,12 @@ void update()
 		}
 	}
 	standend();
-	color_set(COLOR_WHITE,0);
 
+	color_set(COLOR_WHITE,0);
 	mvprintw(TABLE_OFFSET_Y +1, TABLE_OFFSET_X - 8, "DESC");
 	printDesc(false);
 
+	color_set(COLOR_WHITE,0);
 	int x = VAR_X + width/3;
 	for(int i = 1; i < SERIALBUFFER_SIZE; i++){
 		msg m = serialmsg[i];
