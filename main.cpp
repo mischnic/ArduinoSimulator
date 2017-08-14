@@ -118,7 +118,7 @@ void printDesc(bool init){
 		for(int i = 0; i < 20; i++){
 			memset(&d, 0, sizeof(Data));
 			callGetState(&d, DATA_PIN | i);
-			strcpy(descList[i], d.desc);
+			strncpy(descList[i], d.desc, 10);
 		}
 	}
 

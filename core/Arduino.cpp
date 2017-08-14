@@ -68,7 +68,7 @@ void digitalWrite(uint8_t pin, uint8_t state){
         char state[8];
         modeString(state, pin);
         sprintf(buffer, "ERROR: %s, not OUTPUT", state);
-        strcpy(( char *) errors[pin],buffer);
+        strncpy(( char *) errors[pin],buffer, 30);
     }
 }
 
@@ -81,7 +81,7 @@ int digitalRead(uint8_t pin){
         char state[8];
         modeString(state, pin);
         sprintf(buffer, "ERROR: %s, not INPUT", state);
-        strcpy(( char *) errors[pin],buffer);
+        strncpy(( char *) errors[pin],buffer, 30);
         
         return -1;
     }
@@ -97,7 +97,7 @@ int analogRead(uint8_t pin){
         char state[8];
         modeString(state, pin);
         sprintf(buffer, "ERROR: ANALOG pin %i=%s", pin, state);
-        strcpy(( char *) errors[pin],buffer);
+        strncpy(( char *) errors[pin],buffer, 30);
     }
     return pinStates[pin];
 }
