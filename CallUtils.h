@@ -8,8 +8,8 @@
 
 #include "Sketch.h"
 
-typedef void (*func)(void);
-typedef void (*func2)(Data*, int);
+typedef void (*funcVoid)(void);
+typedef void (*funcGetState)(Data*, int);
 
 void call(const char function[]);
 
