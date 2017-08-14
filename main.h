@@ -24,7 +24,7 @@ void toggleSimPause();
 void quit();
 
 void printDesc(bool);
-void renderMotor(int, int, int);
+void renderMotor(int, int, MotorState);
 
 void update();
 

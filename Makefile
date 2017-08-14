@@ -8,6 +8,7 @@ CXX = clang++
 # CPPFLAGS = -ggdb
 
 CPPFLAGS = -I. -Icore
+CXXFLAGS = -fshort-enums
 
 OBJS = CallUtils.o main.o Simulation.o
 

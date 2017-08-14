@@ -143,10 +143,10 @@ void printDesc(bool init){
 	for(int i = 1; i < 20; i++){
 		memset(&d, 0, sizeof(Data));
 		callGetState(&d, DATA_INFO | i);
-		if(strlen(d.desc) == 0){
+		if(d.vtype == Data::aMotor){
+			renderMotor(VAR_Y, VAR_X, d.ms);
+		} else if(strlen(d.desc) == 0){
 			break;
-		} else if(strcmp(d.desc, "MOTOR") == 0){
-			renderMotor(VAR_Y,VAR_X, d.i);
 		} else {
 			color_set(COLOR_WHITE, 0);
 			mvaddstr(VAR_Y+4+2+(i-2), VAR_X, "                     ");
@@ -166,35 +166,33 @@ void printDesc(bool init){
 }
 
 
-void renderMotor(int startY, int startX, int val){
+void renderMotor(int startY, int startX, MotorState ms){
 	for(int y = 0; y < 5; y++){
 		move(startY + y, 0); clrtoeol();
 	}
 	attrset(0);
 	int color = COLOR_WHITE;
-	int dir = val >> 4 & 0b00000011;
-	int state = val & 0b00000011;
-	if(state == 0){
+	if(ms.state == MotorState::WHITE){
 		color = COLOR_WHITE;
-	} else if(state == 1){
+	} else if(ms.state == MotorState::RED){
 		color = COLOR_RED;
-	} else if(state == 2){
+	} else if(ms.state == MotorState::GREEN){
 		color = COLOR_GREEN;
 	}
 	color_set(color,0);
-	if(dir == 1){
+	if(ms.dir == MotorState::LEFT){
 		mvaddstr(startY+0, startX, "   -----  ");
 		mvaddstr(startY+1, startX, " /-"); color_set(COLOR_MAGENTA,0); addstr("/--"); color_set(color,0); addstr("---\\");
 		mvaddstr(startY+2, startX, "|-"); color_set(COLOR_MAGENTA,0); addstr("|"); color_set(color,0); addstr("--M----|");
 		mvaddstr(startY+3, startX, " \\-"); color_set(COLOR_MAGENTA,0); addstr("\\>"); color_set(color,0); addstr("----/");
 		mvaddstr(startY+4, startX, "   -----");
-	} else if(dir == 0) {
+	} else if(ms.dir == MotorState::NONE) {
 		mvaddstr(startY+0, startX, "   -----  ");
 		mvaddstr(startY+1, startX, " /-------\\");
 		mvaddstr(startY+2, startX, "|----M----|");
 		mvaddstr(startY+3, startX, " \\-------/");
 		mvaddstr(startY+4, startX, "   -----");
-	} else if(dir == 2){
+	} else if(ms.dir == MotorState::RIGHT){
 		mvaddstr(startY+0, startX, "   -----  ");
 		mvaddstr(startY+1, startX, " /---"); color_set(COLOR_MAGENTA,0); addstr("--\\"); color_set(color,0); addstr("-\\");
 		mvaddstr(startY+2, startX, "|----M--"); color_set(COLOR_MAGENTA,0); addstr("|"); color_set(color,0); addstr("-|");
