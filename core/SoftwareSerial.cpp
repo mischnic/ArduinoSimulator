@@ -51,11 +51,13 @@ SoftwareSerial::~SoftwareSerial()
 
 void SoftwareSerial::begin(long speed)
 {
+	hasBegun = true;
 	pinMode(_receivePin, SERIAL);
 	pinMode(_transmitPin, SERIAL);
 }
 void SoftwareSerial::end()
 {
+	hasBegun = false;
 	pinMode(_receivePin, -1);
 	pinMode(_transmitPin, -1);
 }
@@ -82,23 +84,25 @@ void SoftwareSerial::shift(void){
 
 size_t SoftwareSerial::write(uint8_t c)
 {
-	if(c == '\n'){
-		 shift();
-	} else{
-		unsigned long len = strlen(serialmsg[0].payload);
-		serialmsg[0].payload[len] = c;
-		serialmsg[0].payload[len+1] = '\0';
-		serialmsg[0].time = millis();
+	if(hasBegun){
+		if(c == '\n'){
+			 shift();
+		} else{
+			unsigned long len = strlen(serialmsg[0].payload);
+			serialmsg[0].payload[len] = c;
+			serialmsg[0].payload[len+1] = '\0';
+			serialmsg[0].time = millis();
+		}
+		return sizeof(c);
+	} else {
+		hasBegun = true;
+		write("Written to Serial without calling begin()\n");
+		hasBegun = false;
+		return 0;
 	}
-	return sizeof(c);
 }
 
 size_t SoftwareSerial::write(const char *str){
-	// if(str[strlen(str)-1] == '\n'){
-	//     shift();
-	// }
-	// strncat(serialmsg[0].payload, str, ((str[strlen(str)-1] == '\n') ? (strlen(str)-1) : (strlen(str))));
-	// serialmsg[0].time = millis();
 	return write(str, strlen(str));
 }
 

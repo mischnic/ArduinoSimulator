@@ -54,6 +54,7 @@ private:
 	// per object data
 	uint8_t _receivePin;
 	uint8_t _transmitPin;
+	bool hasBegun;
 	size_t printNumber(unsigned long, uint8_t);
 	size_t printFloat(double, uint8_t);
 	void shift(void);
