@@ -390,9 +390,15 @@ int main(void)
 	init_pair(COLOR_YELLOW, COLOR_YELLOW,  COLOR_BLACK);
 	init_pair(COLOR_BLUE,   COLOR_BLUE,    COLOR_BLACK);
 	init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
+
 	if(width < (TABLE_OFFSET_X + TABLE_SPACING * NUM_DIGITAL_PINS)){
 		color_set(COLOR_RED,0);
 		mvprintw(0,0, "SCREEN TOO NARROW!");
+		refresh();
+		color_set(COLOR_WHITE,0);
+	} else if(height < (TABLE_OFFSET_Y + 2 + SERIALBUFFER_SIZE)){
+		color_set(COLOR_RED,0);
+		mvprintw(0,0, "SCREEN NOT HIGH ENOUGH!");
 		refresh();
 		color_set(COLOR_WHITE,0);
 	}
