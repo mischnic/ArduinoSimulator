@@ -11,7 +11,7 @@ void* run(void *arg){
 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 	
-	call("_Z5setupv");
+	call(SETUP_NAME);
 
 	static struct timespec tim;
 	tim.tv_sec  = 0;
@@ -29,7 +29,7 @@ void* run(void *arg){
 		}
 
 		pthread_testcancel();
-		call("_Z4loopv");
+		call(LOOP_NAME);
 	}
 	return 0;
 }

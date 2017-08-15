@@ -6,6 +6,9 @@
 #include "CallUtils.h"
 #include <pthread.h>
 
+#define SETUP_NAME "_Z5setupv"
+#define LOOP_NAME "_Z4loopv"
+
 void* run(void *arg);
 
 #endif
