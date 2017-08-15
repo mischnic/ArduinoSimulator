@@ -527,14 +527,12 @@ int main(void)
 				} else{
 					startSim();
 				}
-			} else if(ch == 'd'){
-				if(!simulationRunning) {
-					startSim();
-					pauseSim();
-				}
 			} else if(ch == 'e'){
 				if(simulationRunning) {
 					toggleSimPause();
+				} else {
+					startSim();
+					pauseSim();
 				}
 			} else if(ch == 'q'){
 				quit();
