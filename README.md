@@ -7,6 +7,8 @@ See [ArduinoSimulatorExample](https://github.com/mischnic/ArduinoSimulatorExampl
 
 Uses code from https://github.com/arduino/Arduino and https://github.com/damellis/attiny
 
+![screenshot](screenshot.png)
+
 # Usage
 
 - `w` = Start/stop
